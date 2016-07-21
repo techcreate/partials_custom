@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app='LuisApp'>
+<head>
+	<meta charset="utf-8">
+	<title>Document</title>
+	<script src="angular/angular.js" charset="utf-8"></script>
+	<script src="angular-route/angular-route.js" charset="utf-8"></script>
+	<script>
+	var LuisAppModule = angular.module('LuisApp', ['ngRoute']);
+      // the .controller() method adds a controller to the module
+      LuisAppModule.controller('usersController', function ($scope){
+        $scope.delete = function(user){
+        	$scope.users.splice($scope.users.indexOf(user),1);
+        }
+        $scope.addUser = function (){
+        
+    // add to the array
+    $scope.users.push($scope.newUser); 
+    // clear the form values
+    $scope.newUser = {};
+}
+          $scope.users = [
+            {f_name: 'Mike', l_name: 'Wizouski', fav_lang: 'Ruby'}, 
+            {f_name: 'Matt', l_name: 'Gordon', fav_lang: 'Ruby'}, 
+            {f_name: 'Sam', l_name: 'Park', fav_lang: 'Ruby'},  
+            {f_name: 'Larry', l_name: 'Cortez', fav_lang: 'Ruby'}, 
+          ];
+      });
+
+
+
+	LuisAppModule.config(function($routeProvider) {
+		$routeProvider
+		.when('/',{
+			templateUrl: 'partials/partial1.html'
+		})
+		.when('/partial2', {
+			templateUrl: 'partials/partial2.html'
+		})
+		.otherwise({
+			redirectTo: '/'
+		});
+	});
+	
+
+
+	</script>
+
+
+</head>
+<body>
+<h1>Partials and Custom Users</h1>
+	<a href="#/">Partial</a>
+	<a href="#/partial2">Partial2</a>
+<div ng-view>
+
+
+
+</div>
+
+
+</body>
+</html>
